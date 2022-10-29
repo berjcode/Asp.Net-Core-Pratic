@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewData["Title"] = "Update";
+}
+
+@model Product 
+
+<h1>Ürün Ekle</h1>
+<hr />
+<form asp-asp-controller="Product" asp-action="Update" asp-route-productId="@Model.ProductId" method="post">
+
+    <!--  <input type="hidden" asp-for="ProductId" />-->
+    <div class="form-group"> 
+        <label>Ürün ismi:</label>
+        <input type="text" class="form-control"  asp-for="ProductName" /> <br />
+    </div>
+    <div class="form-group">
+        <label>Ürün Fiyatı:</label>
+        <input type="text" class="form-control" asp-for="Price"/><br />
+    </div>
+        <div class="form-group">
+            <label>Ürün Stoku:</label>
+        <input type="text" class="form-control" asp-for="Stock" /> <br />
+    </div>
+
+    <hr />
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>
+
