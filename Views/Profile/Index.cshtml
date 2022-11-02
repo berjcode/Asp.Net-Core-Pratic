@@ -1,0 +1,41 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+@model List<Profile>
+
+@foreach(var item in Model)
+{
+    <hr />
+ <div class="container">
+  <div class="row">
+<div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="@item.ProfilImage" alt="Card image cap">
+        <div class="card-body">
+                    <h5 hidden="hidden" class="card-title">@item.ID</h5>
+            <p class="card-text">Kullanıcı Adı: @item.UserName</p>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">Ad: @item.Name</li>
+            <li class="list-group-item">Şifre : @item.Password</li>
+            <li class="list-group-item">Yetki:</li>
+        </ul>
+        <div class="card-body">
+                    <button type="button" class="btn btn-primary position-relative">
+                        Profile
+                        <span class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle">
+                            <span class="visually-hidden">New alerts</span>
+                        </span>
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        Güncelleme <span class="badge text-bg-secondary"></span>
+                    </button>
+        </div>
+    </div>
+    <hr />
+        </div>
+    </div>
+
+
+}

@@ -19,6 +19,35 @@
  
 }
 
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        <div>
+            <div>  @Html.TextBox("search",null,new {@class ="form-control", @placeholder ="Ürün Adı"}) </div>
+            <br>
+            <input type="submit" name="btn" value="Ara" class="btn btn-primary" width="100" weight="100"  />
+         
+               
+               
+               
+               
+        </div>
+    }
+</div>
+
+<div class="dropdown" style="position:relative; left: 500px;">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Fitreleme
+    </button>
+    <ul class="dropdown-menu">
+       
+        <li><a class="dropdown-item" asp-controller="Product" asp-action="ListByStock">En Fazla Stok </a></li>
+        <li><a class="dropdown-item" href="#">En Az Ürün Stok</a></li>
+        <li><a class="dropdown-item" href="#">En Yüksek Fiyat</a></li>
+        <li><a class="dropdown-item" href="#">En Düşük Fiyat</a></li>
+    </ul>
+</div>
+
 
 <table class="table table-bordered">
         <tr>
@@ -36,9 +65,44 @@
             <td>@item.ProductName</td>
             <td>@item.Price</td>
             <td>@item.Stock</td>
-            <td><a class="btn btn-danger" asp-controller="Product" asp-action="Remove" asp-route-id="@item.ProductId">Sil</a></td>
+           
+            <td>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                    Sil
+                </button>
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Uyarı</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              İşlemi gerçekleştirmek istediğinizden emin misiniz?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                                <a class="btn btn-danger" asp-controller="Product" asp-action="Remove" asp-route-id="@item.ProductId">Sil</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
             <td><a class="btn btn-warning" asp-controller="Product" asp-action="Update" asp-route-id="@item.ProductId">Güncelle</a></td>
         </tr>
+        
     }
     </table>
+
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+</nav>
 

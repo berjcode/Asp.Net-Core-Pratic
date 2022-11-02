@@ -10,5 +10,6 @@ namespace Turkcell.Models
         }
 
         public DbSet<Product> Products { get; set; }   
+        public  DbSet<Profile> Profiles { get; set; }
     }
 }

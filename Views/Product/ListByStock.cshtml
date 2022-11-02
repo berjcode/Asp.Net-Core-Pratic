@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewData["Title"] = "ListByStock";
+}
+@model List<Product>
+
+
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/Home/Index">Anasayfa</a></li>
+        <li class="breadcrumb-item "><a href="/Product/Index">Ürünler</a></li>
+        <li class="breadcrumb-item  active"><a href="#">Fitreleme</a></li>
+       
+    </ol>
+</nav>
+<div class="dropdown" style="position:relative; left: 500px;">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Fitreleme 
+    </button>
+    <ul class="dropdown-menu">
+
+        
+        <li><a class="dropdown-item" href="#">En Az Ürün Stok</a></li>
+        <li><a class="dropdown-item" href="#">En Yüksek Fiyat</a></li>
+        <li><a class="dropdown-item" href="#">En Düşük Fiyat</a></li>
+    </ul>
+</div>
+
+
+<table class="table table-bordered">
+    <tr>
+
+        <th> Ürün İsmi</th>
+        <th> Ürün Fiyat  </th>
+        <th> Ürün Stok</th>
+        <th> İşlem</th>
+    </tr>
+    @foreach (var item in Model)
+
+    {
+        <tr>
+            <td hidden="hidden">@item.ProductId</td>
+            <td>@item.ProductName</td>
+            <td>@item.Price</td>
+            <td>@item.Stock</td>
+            <td><a class="btn btn-danger" asp-controller="Product" asp-action="Remove" asp-route-id="@item.ProductId">Sil</a></td>
+            <td><a class="btn btn-warning" asp-controller="Product" asp-action="Update" asp-route-id="@item.ProductId">Güncelle</a></td>
+        </tr>
+
+
+    }
+</table>
+
+
+

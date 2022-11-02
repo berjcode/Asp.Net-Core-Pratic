@@ -7,7 +7,7 @@ namespace Turkcell.Controllers
     {
 
         private Context _context;
-        private readonly ProductRepository _productRepository;
+     //   private readonly ProductRepository _productRepository;
         // bir viewden başka bir viewe data taşımak için tempdata kullanırız.
         // İhtiyac duyduğu nesneyi Constructar ile alıyors biz buna depencedy Injection deriz. = design pattern
         public ProductController(Context context)
@@ -25,17 +25,23 @@ namespace Turkcell.Controllers
             _context.SaveChanges();
 
                } */
-            _productRepository = new  ProductRepository();
-            _context = context;
+            //_productRepository = new  ProductRepository();
+             _context = context;
            
         }
          
 
-        public IActionResult Index()
+        public IActionResult Index(string search)
         {
             //   var product = _productRepository.GetAll();
             var product = _context.Products.ToList();
+            if (!string.IsNullOrEmpty(search))
+            {
+
+                product = product.Where(x => x.ProductName.Contains(search)).ToList();
+            }
             return View(product);
+           
         }
 
         public IActionResult Remove(int id)
@@ -43,7 +49,8 @@ namespace Turkcell.Controllers
             var product = _context.Products.Find(id);
             _context.Products.Remove(product);
             _context.SaveChanges();
-          //  _productRepository.Remove(id);
+            TempData["status"] = "Ürün başarıyla Silindi";
+            //  _productRepository.Remove(id);
             return RedirectToAction("Index");
         }
 
@@ -81,5 +88,16 @@ namespace Turkcell.Controllers
             TempData["status"] = "Ürün başarıyla Güncellendi";
             return RedirectToAction("Index");
         }
+
+        public IActionResult ListByStock()
+        {
+           
+            var stock = _context.Products.OrderByDescending(x => x.Stock).ToList();
+            return View(stock);
+        }
+
+
+       
+       
     }
 }
